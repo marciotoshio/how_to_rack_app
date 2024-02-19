@@ -2,8 +2,10 @@
 
 source "https://rubygems.org"
 
-gem "rackup"
+gem "pg"
+gem "puma"
 gem "rack"
+gem "sequel"
 
 group :development do
   gem "byebug"

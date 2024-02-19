@@ -1,10 +1,18 @@
 version: '3.8'
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
   web:
     build: .
     volumes:
       - .:/usr/src/app
     ports:
       - "9292:9292"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/rack_app
     stdin_open: true
     tty: true

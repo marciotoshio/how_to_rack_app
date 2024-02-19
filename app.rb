@@ -1,25 +1,11 @@
-class App
-  def initialize
-    @routes = build_routes
-  end
+require_relative './app/base_resource'
+require_relative './app/card_authorization'
+require_relative './app/cards'
+require_relative './app/create_card'
+require_relative './app/update_card'
 
-  def call(env)
-    endpoint = @routes[env[::Rack::REQUEST_METHOD]][env[::Rack::PATH_INFO]]
-    raise NotFoundError unless endpoint
+require_relative './app/models/card'
 
-    endpoint.call(env)
-  end
+module App
 
-  private
-
-  def build_routes
-    {
-      'GET' => {
-        '/' => ->(env) { [200, {}, ['Welcome!!!']] },
-      },
-      'POST' => {
-        '/authorization' => CardAuthorization.new
-      }
-    }
-  end
 end
